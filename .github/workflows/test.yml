@@ -26,9 +26,4 @@ jobs:
           git fetch
           git checkout ${{ github.ref_name }}
           cd ..
-      - run: just build-ci
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-          API_URL: http://backend:9008
-          PLATFORM: linux/amd64
       - run: just test
