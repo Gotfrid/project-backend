@@ -1,5 +1,7 @@
 name: Tests
 on: push
+env:
+  superviser_repo: "Gotfrid/project-superviser"
 jobs:
   unit:
     runs-on: ubuntu-latest
@@ -9,3 +11,24 @@ jobs:
       - run: uv python install
       - run: uv sync --all-extras --dev
       - run: uv run pytest
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+          repository: ${{ env.superviser_repo }}
+          submodules: true
+      - uses: extractions/setup-just@v2
+      - run: |
+          cd ${{ github.event.repository.name }}
+          git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+          git fetch
+          git checkout ${{ github.ref_name }}
+          cd ..
+      - run: just build-ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+          API_URL: http://backend:9008
+          PLATFORM: linux/amd64
+      - run: just test
