@@ -26,7 +26,7 @@ jobs:
           git fetch
           git checkout ${{ github.ref_name }}
           cd ..
-      - run: just test
+      - run: just test-cy
   update_submodule_ref:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
