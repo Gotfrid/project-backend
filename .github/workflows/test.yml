@@ -31,17 +31,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with: 
-          repository: ${{ env.superviser_repo }}
+      - uses: Gotfrid/project-supervisor/actions/update-submodule-ref
+        with:
+          child: ${{ github.event.repository.name }}
           token: ${{ secrets.PAT }}
-          submodules: true
-      - run: |
-          git submodule update --init --recursive
-          git submodule update --recursive --remote
-      - run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
-          git add --all
-          git commit -m "actions: update submodule: ${{github.event.repository.name}}" || echo "No changes to commit"
-          git push
