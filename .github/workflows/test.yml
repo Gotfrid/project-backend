@@ -1,7 +1,7 @@
 name: Tests
 on: push
 env:
-  superviser_repo: "Gotfrid/project-superviser"
+  superviser_repo: "Gotfrid/project-supervisor"
 jobs:
   unit:
     runs-on: ubuntu-latest
