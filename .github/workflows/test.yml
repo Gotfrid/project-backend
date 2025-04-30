@@ -18,7 +18,7 @@ jobs:
         with:
           child: ${{ github.event.repository.name }}
           branch: ${{ github.ref_name }}
-          engine: playwright
+          engine: cypress
           token: ${{ secrets.PAT }}
   update_submodule_ref:
     if: github.ref == 'refs/heads/main'
