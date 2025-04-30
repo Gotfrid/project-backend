@@ -31,7 +31,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: Gotfrid/project-supervisor/actions/update-submodule-ref
+      - uses: Gotfrid/project-supervisor/actions/update-submodule-ref@main
         with:
           child: ${{ github.event.repository.name }}
           token: ${{ secrets.PAT }}
